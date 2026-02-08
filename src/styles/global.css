@@ -1,0 +1,536 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Colors */
+  --bg-main: #111111;
+  --bg-darker: #000000;
+  --text-main: #ffffff;
+  --text-muted: #888888;
+
+  --primary: #FFBD39;
+  --primary-glow: rgba(255, 189, 57, 0.3);
+  --secondary: #222222;
+  --accent: #FFBD39;
+
+  /* Glass Effects - Adjusted for ProMan's cleaner style */
+  --glass-bg: rgba(34, 34, 34, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --glass-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+
+  /* Transitions */
+  --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  /* Fluid Typography */
+  --fs-xl: clamp(2.5rem, 6vw, 4.5rem);
+  --fs-lg: clamp(1.5rem, 3.5vw, 2.5rem);
+  --fs-md: clamp(1rem, 2vw, 1.2rem);
+  --fs-sm: clamp(0.875rem, 1.5vw, 1rem);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: auto !important;
+  /* Required for Lenis */
+}
+
+body {
+  font-family: 'Jost', sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scroll Snap Container */
+.snap-wrapper {
+  height: auto;
+  min-height: 100vh;
+}
+
+/* Lenis Recommended CSS */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Hide Scrollbar Globally */
+/* Hide Scrollbar Globally */
+html,
+body,
+* {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+}
+
+.snap-section {
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 100px 24px 60px;
+}
+
+/* Iris Reveal Entrance Wrapper - Refined for continuous scrolling */
+.iris-reveal-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  background: var(--bg-main);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Clip-path removed to allow immediate content visibility/scrolling */
+}
+
+/* We can keep the .open class for other uses or remove it */
+.iris-reveal-wrapper.reveal {
+  opacity: 1;
+}
+
+/* Base Layout */
+.app-root {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.page-wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (max-width: 768px) {
+  .page-wrap {
+    padding: 0 16px;
+  }
+}
+
+/* Global Utilities */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 0;
+  /* ProMan uses more sharp/minimalist corners? Let's keep subtle rounding */
+  box-shadow: var(--glass-shadow);
+}
+
+.title-gradient {
+  background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.primary-gradient {
+  background: linear-gradient(135deg, var(--primary) 0%, #e6a827 100%);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 26px;
+  border-radius: 50px;
+  /* ProMan uses rounded pills */
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  cursor: pointer;
+  border: none;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.btn.primary {
+  background: var(--primary);
+  color: #000;
+  box-shadow: 0 4px 14px var(--primary-glow);
+}
+
+.btn.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px var(--primary-glow);
+  background: #e6a827;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: #fff;
+  border: 2px solid var(--primary);
+}
+
+.btn.ghost:hover {
+  background: var(--primary);
+  color: #000;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Reduced Animated Background Blobs for cleaner ProMan look */
+.mesh-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  filter: blur(120px);
+  opacity: 0.15;
+  /* Much more subtle */
+}
+
+.blob {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  animation: move 20s infinite alternate linear;
+}
+
+.blob-1 {
+  background: var(--primary);
+  top: -10%;
+  left: -10%;
+  opacity: 0.2;
+  animation-duration: 25s;
+}
+
+.blob-2 {
+  background: #333;
+  bottom: -10%;
+  right: -10%;
+  opacity: 0.2;
+  animation-duration: 30s;
+}
+
+.blob-3 {
+  background: var(--accent);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.15;
+  animation-duration: 40s;
+}
+
+.blob-4 {
+  background: #f43f5e;
+  top: 20%;
+  right: 20%;
+  opacity: 0.1;
+  animation: move 35s infinite alternate-reverse ease-in-out;
+}
+
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float-particle 10s infinite linear;
+}
+
+/* Position particles randomly */
+.particle:nth-child(1) {
+  left: 10%;
+  top: 20%;
+  animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+  left: 20%;
+  top: 40%;
+  animation-delay: -2s;
+}
+
+.particle:nth-child(3) {
+  left: 30%;
+  top: 60%;
+  animation-delay: -4s;
+}
+
+.particle:nth-child(4) {
+  left: 40%;
+  top: 80%;
+  animation-delay: -6s;
+}
+
+.particle:nth-child(5) {
+  left: 50%;
+  top: 10%;
+  animation-delay: -1s;
+}
+
+.particle:nth-child(6) {
+  left: 60%;
+  top: 30%;
+  animation-delay: -3s;
+}
+
+.particle:nth-child(7) {
+  left: 70%;
+  top: 50%;
+  animation-delay: -5s;
+}
+
+.particle:nth-child(8) {
+  left: 80%;
+  top: 70%;
+  animation-delay: -7s;
+}
+
+.particle:nth-child(9) {
+  left: 90%;
+  top: 90%;
+  animation-delay: -9s;
+}
+
+.particle:nth-child(10) {
+  left: 15%;
+  top: 45%;
+  animation-delay: -1.5s;
+}
+
+.particle:nth-child(11) {
+  left: 25%;
+  top: 65%;
+  animation-delay: -3.5s;
+}
+
+.particle:nth-child(12) {
+  left: 35%;
+  top: 85%;
+  animation-delay: -5.5s;
+}
+
+.particle:nth-child(13) {
+  left: 45%;
+  top: 25%;
+  animation-delay: -7.5s;
+}
+
+.particle:nth-child(14) {
+  left: 55%;
+  top: 5%;
+  animation-delay: -0.5s;
+}
+
+.particle:nth-child(15) {
+  left: 65%;
+  top: 15%;
+  animation-delay: -2.5s;
+}
+
+.particle:nth-child(16) {
+  left: 75%;
+  top: 35%;
+  animation-delay: -4.5s;
+}
+
+.particle:nth-child(17) {
+  left: 85%;
+  top: 55%;
+  animation-delay: -6.5s;
+}
+
+.particle:nth-child(18) {
+  left: 95%;
+  top: 75%;
+  animation-delay: -8.5s;
+}
+
+.particle:nth-child(19) {
+  left: 5%;
+  top: 95%;
+  animation-delay: -10.5s;
+}
+
+.particle:nth-child(20) {
+  left: 50%;
+  top: 50%;
+  animation-delay: -12.5s;
+}
+
+@keyframes float-particle {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.3;
+  }
+
+  80% {
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: translateY(-100px) translateX(20px);
+    opacity: 0;
+  }
+}
+
+@keyframes move {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+
+  to {
+    transform: translate(100px, 100px) scale(1.1);
+  }
+}
+
+@media (max-width: 768px) {
+  .snap-section {
+    padding-top: 60px;
+    height: auto;
+    min-height: 100vh;
+    scroll-snap-align: none;
+    /* Disable snapping on small mobile if content overflows */
+  }
+
+  .snap-wrapper {
+    height: auto;
+    overflow-y: visible;
+    scroll-snap-type: none;
+  }
+}
+
+/* Premium Animations */
+.mask {
+  overflow: hidden;
+  display: block;
+}
+
+.mask span,
+.mask p {
+  display: block;
+  transform: translateY(100%);
+  transition: transform 1s cubic-bezier(0.83, 0, 0.17, 1);
+}
+
+.reveal .mask span,
+.reveal .mask p {
+  transform: translateY(0);
+}
+
+.name .mask:nth-child(2) span {
+  transition-delay: 0.1s;
+}
+
+.tagline {
+  transition-delay: 0.2s;
+}
+
+/* Marquee */
+.marquee {
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  padding: 30px 0;
+  background: var(--bg-main);
+  border-top: 1px solid var(--glass-border);
+  overflow: hidden;
+  z-index: 5;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee-scroll 60s linear infinite;
+}
+
+.marquee span {
+  font-size: clamp(2rem, 10vw, 5rem);
+  font-weight: 800;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+  letter-spacing: 5px;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@media (max-width: 768px) {
+  .marquee {
+    padding: 15px 0;
+  }
+
+  .marquee span {
+    font-size: 2.5rem;
+  }
+}

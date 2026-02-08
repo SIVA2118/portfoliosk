@@ -1,0 +1,162 @@
+/* Page specific Education styles */
+.education-section {
+  width: 100%;
+  padding: 80px 24px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+
+.reveal.education-section {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-head {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-subtitle {
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.quality-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.quality-column {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.column-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 10px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.timeline-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  position: relative;
+  border-left: 2px solid #333;
+  margin-left: 10px;
+  padding-left: 30px;
+}
+
+.timeline-card {
+  position: relative;
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.reveal .timeline-card {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.8s ease;
+  transition-delay: calc(0.8s + (var(--i) * 0.1s));
+}
+
+.timeline-dot {
+  position: absolute;
+  top: 5px;
+  left: -38px;
+  width: 14px;
+  height: 14px;
+  background: var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.card-meta {
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+}
+
+.card-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 992px) {
+  .quality-grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .education-section {
+    padding: 60px 20px;
+  }
+
+  .quality-grid {
+    gap: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-head {
+    margin-bottom: 40px;
+  }
+
+  .timeline-container {
+    padding-left: 20px;
+    border-left-width: 1px;
+    gap: 30px;
+  }
+
+  .timeline-dot {
+    left: -26px;
+    width: 12px;
+    height: 12px;
+  }
+
+  .column-title {
+    font-size: 1.3rem;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+  }
+
+  .card-desc {
+    font-size: 0.9rem;
+  }
+}

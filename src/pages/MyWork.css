@@ -1,0 +1,252 @@
+/* Page specific My Work styles */
+.portfolio-section {
+  width: 100%;
+  padding: 80px 24px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+
+.reveal.portfolio-section {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-head {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-subtitle {
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.filter-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 5px 0;
+  position: relative;
+  transition: var(--transition);
+}
+
+.filter-btn.active {
+  color: var(--primary);
+}
+
+.filter-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: var(--transition);
+}
+
+.filter-btn.active::after {
+  width: 100%;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  /* Border thickness */
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.portfolio-item::before {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background: conic-gradient(transparent,
+      rgba(255, 189, 57, 0.4),
+      var(--primary),
+      rgba(255, 189, 57, 0.4),
+      transparent 30%);
+  animation: border-rotate 4s linear infinite;
+  z-index: 0;
+}
+
+@keyframes border-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.reveal .portfolio-item {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: calc(0.8s + (var(--i) * 0.1s));
+}
+
+.item-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--bg-main);
+  border-radius: 18px;
+  /* Slightly smaller than parent to show border */
+  z-index: 1;
+}
+
+.item-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.item-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.4s ease;
+  transform: translateY(100%);
+}
+
+.item-inner:hover .item-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.item-inner:hover .item-img {
+  transform: scale(1.1);
+}
+
+.overlay-content {
+  text-align: center;
+}
+
+.item-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.item-cat {
+  color: var(--primary);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.view-btn {
+  width: 50px;
+  height: 50px;
+  background: var(--primary);
+  color: #000;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-weight: 300;
+  transition: var(--transition);
+}
+
+.view-btn:hover {
+  transform: rotate(90deg);
+  background: #fff;
+}
+
+@media (max-width: 992px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-section {
+    padding: 60px 20px;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .filter-tabs {
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .filter-btn {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+    margin: 0 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-head {
+    margin-bottom: 30px;
+  }
+
+  .item-title {
+    font-size: 1.3rem;
+  }
+
+  .view-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+  }
+}

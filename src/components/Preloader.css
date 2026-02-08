@@ -1,0 +1,299 @@
+.preloader-overlay {
+    position: fixed;
+    inset: 0;
+    background: #000000;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s cubic-bezier(0.7, 0, 0.3, 1),
+        transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.preloader-overlay.exit {
+    opacity: 0;
+    transform: translateY(-100%);
+    pointer-events: none;
+}
+
+.preloader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    z-index: 10;
+}
+
+/* Framed Image Style based on user reference */
+.framed-image-container {
+    position: relative;
+    width: 320px;
+    height: 400px;
+    animation: card-entrance 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+.frame-border {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: -15px;
+    bottom: -15px;
+    border: 10px solid var(--primary);
+    /* Thick golden border */
+    z-index: 1;
+    animation: border-reveal 1s 0.3s ease-in-out both;
+}
+
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #111;
+    z-index: 2;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.preloader-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%);
+    animation: img-zoom 4s ease-out infinite alternate;
+}
+
+@keyframes card-entrance {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes border-reveal {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes img-zoom {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.1);
+    }
+}
+
+/* Loading Bar */
+.loading-bar-container {
+    width: 200px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.loading-progress {
+    height: 100%;
+    width: 0;
+    background: var(--primary);
+    animation: progress-fill 2.5s ease-in-out forwards;
+}
+
+@keyframes progress-fill {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+/* Text Animation */
+.preloader-text {
+    font-family: inherit;
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: 12px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.char {
+    display: inline-block;
+    opacity: 0;
+    animation: char-reveal 0.5s ease forwards;
+}
+
+.char:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.char:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.char:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.char:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.char:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.char:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+.char:nth-child(7) {
+    animation-delay: 0.7s;
+}
+
+.char:nth-child(8) {
+    animation-delay: 0.8s;
+}
+
+.char:nth-child(9) {
+    animation-delay: 0.9s;
+}
+
+@keyframes char-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Small Golden Bubble Animations */
+.bubbles-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.mini-bubble {
+    position: absolute;
+    bottom: -50px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.4), var(--primary));
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(255, 189, 57, 0.3);
+    width: 15px;
+    height: 15px;
+    opacity: 0;
+    animation: bubble-up infinite ease-in;
+}
+
+/* Variation in sizes */
+.mini-bubble:nth-child(even) {
+    width: 8px;
+    height: 8px;
+}
+
+.mini-bubble:nth-child(3n) {
+    width: 22px;
+    height: 22px;
+}
+
+@keyframes bubble-up {
+    0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.6;
+    }
+
+    90% {
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translateY(-110vh) translateX(30px) scale(1.1);
+        opacity: 0;
+    }
+}
+
+/* Big Fixed Ambience Balls */
+.big-blob {
+    position: absolute;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.4), var(--primary));
+    border-radius: 50%;
+    filter: blur(60px);
+    /* Reduced blur for more 'ball' shape */
+    opacity: 0.2;
+    /* Increased opacity */
+    z-index: -1;
+    /* Removed drift animation to make them 'fixed' */
+}
+
+.big-blob-1 {
+    width: 500px;
+    height: 500px;
+    top: -100px;
+    left: -50px;
+}
+
+.big-blob-2 {
+    width: 450px;
+    height: 450px;
+    bottom: -80px;
+    right: -80px;
+    background: #ffecb3;
+}
+
+.big-blob-3 {
+    width: 400px;
+    height: 400px;
+    top: 35%;
+    right: 10%;
+    opacity: 0.15;
+}
+
+@keyframes drift {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(50px, -50px) scale(1.1);
+    }
+}
+
+@media (max-width: 480px) {
+    .framed-image-container {
+        width: 240px;
+        height: 300px;
+    }
+
+    .preloader-text {
+        font-size: 1rem;
+        letter-spacing: 6px;
+    }
+}
