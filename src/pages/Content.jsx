@@ -100,6 +100,27 @@ export default function Content() {
                 </div>
               </div>
             ))}
+
+            <div className="social-links-section">
+              <h4 className="social-title">Connect with me</h4>
+              <div className="social-links">
+                <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="social-icon-link">
+                  <img src="/social/github.png" alt="GitHub" />
+                </a>
+                <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="social-icon-link">
+                  <img src="/social/linkedin.png" alt="LinkedIn" />
+                </a>
+                <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" className="social-icon-link">
+                  <img src="/social/twitter.png" alt="Twitter" />
+                </a>
+                <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" className="social-icon-link">
+                  <img src="/social/instagram.png" alt="Instagram" />
+                </a>
+                <a href="mailto:sivakumarbca2021@gmail.com" className="social-icon-link">
+                  <img src="/social/gmail.png" alt="Gmail" />
+                </a>
+              </div>
+            </div>
           </div>
 
           <div className="contact-form-column">
