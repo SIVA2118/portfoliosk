@@ -95,6 +95,68 @@
   font-size: 1rem;
 }
 
+/* Social Links Styles */
+.social-links-section {
+  margin-top: 40px;
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.reveal .social-links-section {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.8s ease;
+  transition-delay: 1.2s;
+}
+
+.social-title {
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.social-icon-link {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  padding: 10px;
+}
+
+.social-icon-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(200%);
+  transition: all 0.3s ease;
+}
+
+.social-icon-link:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+.social-icon-link:hover img {
+  filter: brightness(0);
+}
+
 .contact-form {
   display: flex;
   flex-direction: column;
