@@ -36,7 +36,7 @@ const ManageAbout = () => {
         } finally {
             setLoading(false);
         }
-    }, [API_BASE_URL]);
+    }, []);
 
     useEffect(() => {
         fetchAbout();

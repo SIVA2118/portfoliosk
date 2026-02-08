@@ -28,7 +28,7 @@ const ManageMessages = () => {
         } finally {
             setLoading(false);
         }
-    }, [token, API_BASE_URL]);
+    }, [token]);
 
     useEffect(() => {
         fetchMessages();

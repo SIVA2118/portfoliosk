@@ -28,7 +28,7 @@ const ManageEducation = () => {
         } finally {
             setLoading(false);
         }
-    }, [API_BASE_URL]);
+    }, []);
 
     useEffect(() => {
         fetchEntries();
