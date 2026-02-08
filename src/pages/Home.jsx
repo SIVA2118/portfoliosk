@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import "./Home.css";
 import { API_BASE_URL } from "../apiConfig";
 
@@ -7,9 +7,9 @@ export default function Home() {
   const [isRevealed, setIsRevealed] = useState(false);
   const [roleText, setRoleText] = useState("");
   const [aboutData, setAboutData] = useState(null);
-  const roles = (aboutData && aboutData.roles && aboutData.roles.length > 0)
+  const roles = useMemo(() => (aboutData && aboutData.roles && aboutData.roles.length > 0)
     ? aboutData.roles
-    : ["Full Stack Developer", "MCA Student", "UI/UX Designer"];
+    : ["Full Stack Developer", "MCA Student", "UI/UX Designer"], [aboutData]);
   const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [delta, setDelta] = useState(150);
@@ -55,35 +55,35 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    const tick = () => {
+      let i = roleIndex % roles.length;
+      let fullText = roles[i];
+      let updatedText = isDeleting
+        ? fullText.substring(0, roleText.length - 1)
+        : fullText.substring(0, roleText.length + 1);
+
+      setRoleText(updatedText);
+
+      if (isDeleting) {
+        setDelta(prevDelta => prevDelta / 2);
+      }
+
+      if (!isDeleting && updatedText === fullText) {
+        setIsDeleting(true);
+        setDelta(2000); // Wait before deleting
+      } else if (isDeleting && updatedText === "") {
+        setIsDeleting(false);
+        setRoleIndex(roleIndex + 1);
+        setDelta(200);
+      }
+    };
+
     let ticker = setInterval(() => {
       tick();
     }, delta);
 
     return () => clearInterval(ticker);
-  }, [roleText, delta]);
-
-  const tick = () => {
-    let i = roleIndex % roles.length;
-    let fullText = roles[i];
-    let updatedText = isDeleting
-      ? fullText.substring(0, roleText.length - 1)
-      : fullText.substring(0, roleText.length + 1);
-
-    setRoleText(updatedText);
-
-    if (isDeleting) {
-      setDelta(prevDelta => prevDelta / 2);
-    }
-
-    if (!isDeleting && updatedText === fullText) {
-      setIsDeleting(true);
-      setDelta(2000); // Wait before deleting
-    } else if (isDeleting && updatedText === "") {
-      setIsDeleting(false);
-      setRoleIndex(roleIndex + 1);
-      setDelta(200);
-    }
-  };
+  }, [roleText, delta, isDeleting, roleIndex, roles]);
 
   return (
     <div className={`iris-reveal-wrapper ${isRevealed ? 'open' : ''}`}>

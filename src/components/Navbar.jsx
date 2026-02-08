@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 
+const navLinks = [
+  { name: 'Home', id: 'home' },
+  { name: 'About', id: 'about' },
+  { name: 'Education', id: 'education' },
+  { name: 'Skills', id: 'skills' },
+  { name: 'My Work', id: 'my-work' },
+  { name: 'YouTube', id: 'youtube' },
+  { name: 'Services', id: 'service' },
+  { name: 'Contact', id: 'contact' },
+];
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
-  const navLinks = [
-    { name: 'Home', id: 'home' },
-    { name: 'About', id: 'about' },
-    { name: 'Education', id: 'education' },
-    { name: 'Skills', id: 'skills' },
-    { name: 'My Work', id: 'my-work' },
-    { name: 'YouTube', id: 'youtube' },
-    { name: 'Services', id: 'service' },
-    { name: 'Contact', id: 'contact' },
-  ];
+
 
   const [scrolled, setScrolled] = useState(false);
 

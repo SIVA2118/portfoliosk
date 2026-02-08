@@ -64,7 +64,7 @@ const AdminDashboard = () => {
         };
 
         fetchStats();
-    }, [token, API_BASE_URL, location.pathname]); // Refresh when switching tabs
+    }, [token, location.pathname]); // Refresh when switching tabs
 
     const handleLogout = () => {
         logout();

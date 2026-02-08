@@ -8,7 +8,7 @@ export default function MyWork() {
   const [isRevealed, setIsRevealed] = useState(false);
   const [filter, setFilter] = useState("All");
   const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const fetchProjects = async () => {
@@ -20,8 +20,6 @@ export default function MyWork() {
         }
       } catch (error) {
         console.error('Error fetching projects:', error);
-      } finally {
-        setLoading(false);
       }
     };
 
