@@ -40,8 +40,8 @@ body,
 }
 
 html {
-  scroll-behavior: auto !important;
-  /* Required for Lenis */
+  scroll-behavior: smooth;
+  /* Warning: This might conflict with Lenis if not handled */
 }
 
 body {
