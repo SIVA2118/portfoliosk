@@ -67,24 +67,27 @@ export default function Navbar() {
   }, []);
 
   const handleClick = (id) => {
+    setOpen(false);
+    setActiveSection(id);
+
+    // Calculate dynamic offset based on navbar height
+    const navbarHeight = document.querySelector('.navbar').offsetHeight || 70;
+    // Add a little extra padding
+    const offset = -(navbarHeight + 10);
+
     if (window.lenis) {
-      setOpen(false);
-      setActiveSection(id);
       window.lenis.scrollTo(`#${id}`, {
-        offset: -70,
+        offset: offset,
         duration: 1.5,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
       });
     } else {
       const element = document.getElementById(id);
       if (element) {
-        setOpen(false);
-        setActiveSection(id);
-        const offset = 70;
         const bodyRect = document.body.getBoundingClientRect().top;
         const elementRect = element.getBoundingClientRect().top;
         const elementPosition = elementRect - bodyRect;
-        const offsetPosition = elementPosition - offset;
+        const offsetPosition = elementPosition + offset;
 
         window.scrollTo({
           top: offsetPosition,
